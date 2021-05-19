@@ -62,7 +62,7 @@ public class AuthController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getId(),userDetails.getUsername(),userDetails.getFullName(),
                 userDetails.getEmail(),
-                userDetails.getAddress(),userDetails.getDob(),userDetails.getPhone(),userDetails.getIdCard(),userDetails.getFacebookId(),roles));
+                userDetails.getAddress(),userDetails.getDob(),userDetails.getPhone(),userDetails.getMoney(),userDetails.getIdCard(),userDetails.getFacebookId(),roles));
     }
 
     @PostMapping("/signup")

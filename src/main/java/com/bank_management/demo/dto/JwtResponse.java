@@ -13,12 +13,13 @@ public class JwtResponse {
     private String address;
     private String dob;
     private String phone;
+    private Double money;
     private String IdCard;
     private String FacebookId;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email,String fullName, String address,String dob
-                       ,String phone,String IdCard,String FacebookId,List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username, String email, String fullName, String address, String dob
+            , String phone, Double money, String IdCard, String FacebookId, List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
@@ -27,9 +28,18 @@ public class JwtResponse {
         this.address = address;
         this.dob = dob;
         this.phone = phone;
+        this.money = money;
         this.IdCard = IdCard;
         this.FacebookId =FacebookId;
         this.roles = roles;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
     public String getAccessToken() {

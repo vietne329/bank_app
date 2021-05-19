@@ -60,6 +60,19 @@ public class User {
         FacebookId = facebookId;
     }
 
+    public User(String username, String password, String fullName, String address, String dob, String phone, String email,Double money, String idCard, String facebookId) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.address = address;
+        this.dob = dob;
+        this.phone = phone;
+        this.money = money;
+        this.email = email;
+        IdCard = idCard;
+        FacebookId = facebookId;
+    }
+
     public Double getMoney() {
         return money;
     }

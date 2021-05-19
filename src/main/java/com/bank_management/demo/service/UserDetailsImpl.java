@@ -29,6 +29,8 @@ public class UserDetailsImpl implements UserDetails {
 
     private String phone;
 
+    private Double money;
+
     private String IdCard;
 
     private String FacebookId;
@@ -39,7 +41,7 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends  GrantedAuthority> authorities;
 
 
-    public UserDetailsImpl(Long id, String username, String email, String fullName, String address, String dob, String phone, String idCard, String facebookId, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String email, String fullName, String address, String dob, String phone, Double money, String idCard, String facebookId, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -47,6 +49,7 @@ public class UserDetailsImpl implements UserDetails {
         this.address = address;
         this.dob = dob;
         this.phone = phone;
+        this.money = money;
         IdCard = idCard;
         FacebookId = facebookId;
         this.password = password;
@@ -58,7 +61,7 @@ public class UserDetailsImpl implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(),user.getFullName(),user.getAddress(),user.getDob(),user.getPhone(), user.getIdCard(), user.getFacebookId(),user.getPassword(),authorities);
+        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(),user.getFullName(),user.getAddress(),user.getDob(),user.getPhone(), user.getMoney(), user.getIdCard(), user.getFacebookId(),user.getPassword(),authorities);
     }
 
     @Override
@@ -96,6 +99,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getFacebookId() {
         return FacebookId;
+    }
+
+    public Double getMoney() {
+        return money;
     }
 
     @Override
