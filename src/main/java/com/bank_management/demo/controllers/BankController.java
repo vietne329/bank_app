@@ -84,8 +84,8 @@ public class BankController {
         return new ResponseEntity<>(bankSavingBook, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/bank/withdrawal/{uid}", produces = "application/json")
-    public ResponseEntity<?> getWithdrawal(@PathVariable Long uid) throws ParseException {
+    @GetMapping(value = "/bank/moneycurrent/{uid}",produces = "application/json")
+    public ResponseEntity<?> getMoneyCurrent(@PathVariable Long uid) throws ParseException {
 //        Date date = new Date();
 //        String time1 = "15/6/2021";
 
@@ -107,10 +107,32 @@ public class BankController {
 
         Double result = bankSer.WithdrawalMoney(bankSavingBook, day);
 
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/bank/withdrawal/{uid}", produces = "application/json")
+    public ResponseEntity<?> getWithdrawal(@PathVariable Long uid) throws ParseException {
+
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String time1 = dtf.format(now);
+        System.out.println("Local date: " +  time1);
+
+        BankSavingBook bankSavingBook = bankSer.getBankSavingByUser(uid);
+        Date date1 = df.parse(bankSavingBook.getStartDate());
+        Date date2 = df.parse(time1);
+
+        int day = (int) ((date2.getTime() - date1.getTime()) / 86400000);
+        System.out.println("Ngày tính ra: " + day);
+
+        Double result = bankSer.WithdrawalMoney(bankSavingBook, day);
+
         bankSer.removeBank(bankSavingBook.getId());
 
         User user = userSer.getUserById(uid);
-
+        System.out.println(result);
         Double moneyUser = result + user.getMoney();
         user.setMoney(moneyUser);
         userSer.saveUser(user);

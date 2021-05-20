@@ -70,15 +70,13 @@ public class AuthController {
         if(userRepository.existsByUsername(signupRequest.getUsername())){
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
-
         if(userRepository.existsByEmail(signupRequest.getEmail())){
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
-
         User user = new User(signupRequest.getUsername(),encoder.encode(signupRequest.getPassword()),
                 signupRequest.getFullName(),signupRequest.getAddress(),signupRequest.getDob(),signupRequest.getPhone(),
                 signupRequest.getEmail(),signupRequest.getIdCard(),signupRequest.getFacebookId());
-        Set<String> strRoles= signupRequest.getRole();
+//        Set<String> strRoles= signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
 //        if(strRoles == null){

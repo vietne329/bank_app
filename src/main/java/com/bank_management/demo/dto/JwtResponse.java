@@ -18,9 +18,9 @@ public class JwtResponse {
     private String FacebookId;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, String fullName, String address, String dob
+    public JwtResponse(String token, Long id, String username, String email, String fullName, String address, String dob
             , String phone, Double money, String IdCard, String FacebookId, List<String> roles) {
-        this.token = accessToken;
+        this.token = token;
         this.id = id;
         this.username = username;
         this.email = email;
