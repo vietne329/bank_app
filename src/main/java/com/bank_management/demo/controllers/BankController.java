@@ -110,6 +110,28 @@ public class BankController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/bank/moneyontime/{uid}",produces = "application/json")
+    public ResponseEntity<?> getMoneyOnTime(@PathVariable Long uid) throws ParseException {
+//        Date date = new Date();
+//        String time1 = "15/6/2021";
+
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String time1 = dtf.format(now);
+        System.out.println("Local date: " +  time1);
+
+        BankSavingBook bankSavingBook = bankSer.getBankSavingByUser(uid);
+
+        Double result = bankSer.getMoneyOnTime(bankSavingBook);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+
+
     @GetMapping(value = "/bank/withdrawal/{uid}", produces = "application/json")
     public ResponseEntity<?> getWithdrawal(@PathVariable Long uid) throws ParseException {
 

@@ -48,7 +48,18 @@ public class BankService {
         return result;
     }
 
+    public Double getMoneyOnTime(BankSavingBook bankSavingBook) {
 
+        Interestrate interestrate = interestRateRespo.findById(bankSavingBook.getInterestrate().getId()).get();
+        double laiSuat = interestrate.getInterestRate();
+        int time = interestrate.getTimes();
+        int day = time*30;
+        Double result = null;
+
+        result = caculator(bankSavingBook.getMoney(), day, laiSuat);
+
+        return result;
+    }
 
     private Double caculator(Double bankMoney, int soNgay, Double laiSuat) {
 
