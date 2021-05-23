@@ -21,4 +21,8 @@ public class UserService {
         return userRepo.save(user);
     }
 
+    public User findByFbId(String fbId) {
+        System.out.println("???");
+        return userRepo.findByFacebookId(fbId);
+    }
 }

@@ -37,10 +37,10 @@ public class User {
     private String email;
 
     @Column(name="id_card")
-    private String IdCard;
+    private String idCard;
 
     @Column(name="facebook_id")
-    private String FacebookId;
+    private String facebookId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -56,8 +56,8 @@ public class User {
         this.dob = dob;
         this.phone = phone;
         this.email = email;
-        IdCard = idCard;
-        FacebookId = facebookId;
+        this.idCard = idCard;
+        this.facebookId = facebookId;
     }
 
     public User(String username, String password, String fullName, String address, String dob, String phone, String email,Double money, String idCard, String facebookId) {
@@ -69,8 +69,8 @@ public class User {
         this.phone = phone;
         this.money = money;
         this.email = email;
-        IdCard = idCard;
-        FacebookId = facebookId;
+        this.idCard = idCard;
+        this.facebookId = facebookId;
     }
 
     public Double getMoney() {
@@ -154,18 +154,18 @@ public class User {
     }
 
     public String getIdCard() {
-        return IdCard;
+        return idCard;
     }
 
     public void setIdCard(String idCard) {
-        IdCard = idCard;
+        this.idCard = idCard;
     }
 
     public String getFacebookId() {
-        return FacebookId;
+        return facebookId;
     }
 
     public void setFacebookId(String facebookId) {
-        FacebookId = facebookId;
+        this.facebookId = facebookId;
     }
 }

@@ -15,7 +15,10 @@ import com.bank_management.demo.service.UserDetailsImpl;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.bank_management.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,8 +48,30 @@ public class AuthController {
     PasswordEncoder encoder;
 
     @Autowired
+    UserService userSer;
+
+    @Autowired
     JwtUtils jwtUtils;
 
+    @GetMapping(value = "/sigin_fb", produces = "application/json")
+    public ResponseEntity<?> authenticateUserWithFbId(@RequestParam(name = "faceId") String faceId) {
+        System.out.println("cc");
+        User user = userSer.findByFbId(faceId);
+
+        if (user == null) {
+            return new ResponseEntity<>("Faild", HttpStatus.OK);
+        }
+
+        String jwt = jwtUtils.generateJwtTokenFB(user);
+        List<String> roles  = user.getRoles().stream()
+                .map(item->item.getName().toString())
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new JwtResponse(jwt,user.getId(),user.getUsername(),
+                user.getEmail(),user.getFullName(),
+                user.getAddress(),user.getDob(),user.getPhone(),user.getMoney(),user.getIdCard(),user.getFacebookId(),roles));
+    }
+
+    //API
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest){
         Authentication authentication = authenticationManager.authenticate(

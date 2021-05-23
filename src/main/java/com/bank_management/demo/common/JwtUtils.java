@@ -1,5 +1,6 @@
 package com.bank_management.demo.common;
 
+import com.bank_management.demo.entities.User;
 import com.bank_management.demo.service.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,6 +25,15 @@ public class JwtUtils {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder().setSubject((userPrincipal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime()+jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512,jwtSecret)
+                .compact();
+    }
+
+    public String generateJwtTokenFB(User user){
+
+        return Jwts.builder().setSubject(user.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime()+jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512,jwtSecret)

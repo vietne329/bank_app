@@ -3,6 +3,7 @@ package com.bank_management.demo.dto;
 public class LoginRequest {
     private String username;
     private String password;
+    private String FacebookId;
 
     public LoginRequest(){
         super();
@@ -12,6 +13,15 @@ public class LoginRequest {
         super();
         this.username = username;
         this.password = password;
+    }
+
+
+    public String getFacebookId() {
+        return FacebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        FacebookId = facebookId;
     }
 
     public String getUsername() {
