@@ -63,7 +63,7 @@ public class BankService {
 
     private Double caculator(Double bankMoney, int soNgay, Double laiSuat) {
 
-        return (bankMoney * soNgay * laiSuat) / 365;
+        return (bankMoney * soNgay * laiSuat/100) / 365;
     }
 
     public BankSavingBook getBankSavingByUser(Long id) {
