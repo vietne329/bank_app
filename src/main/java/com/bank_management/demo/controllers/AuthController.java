@@ -59,7 +59,7 @@ public class AuthController {
         User user = userSer.findByFbId(faceId);
 
         if (user == null) {
-            return new ResponseEntity<>("Faild", HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
         String jwt = jwtUtils.generateJwtTokenFB(user);
